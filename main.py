@@ -34,18 +34,21 @@ async def main():
         model = llm
     )
 
-    result =await agent.ainvoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "search for brommstick in amazon"
-                }
-            ]
-        }
-    )
+    products = ["wireless bluetooth headphones", "mechanical keyboard"]
 
-    print(result['messages'][-1].content)
+    for product in products:
+        print(f"\n--- Searching for: {product} ---")
+        result = await agent.ainvoke(
+            {
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": f"search for {product} in amazon and show me the top results with name and price"
+                    }
+                ]
+            }
+        )
+        print(result['messages'][-1].content)
 
 
 import asyncio

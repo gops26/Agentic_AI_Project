@@ -6,3 +6,7 @@ the project starts with simple composio search with llm integration
 
     - Langchain_Ollama
     - Composio tools - search
+
+### 23 February 19.46 pm
+
+   wrote a basic code to use composio tools
