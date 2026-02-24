@@ -8,7 +8,7 @@ import os
 
 
 
-llm = ChatOllama(model="llama3.2:latest")
+llm = ChatOllama(model="gpt-oss:20b-cloud")
 external_user_id = "pg-test-baad7476-63b1-43c8-8980-3cf47519cdf3"
 
 
@@ -26,16 +26,12 @@ async def main():
             }
         }
     )
-
     tools = await mcp_cleint.get_tools()
-
     agent = create_agent(
         tools = tools,
         model = llm
     )
-
     products = ["wireless bluetooth headphones", "mechanical keyboard"]
-
     for product in products:
         print(f"\n--- Searching for: {product} ---")
         result = await agent.ainvoke(
@@ -43,7 +39,7 @@ async def main():
                 "messages": [
                     {
                         "role": "user",
-                        "content": f"search for {product} in amazon and show me the top results with name and price"
+                        "content": f"search using ``COMPOSIO_SEARCH_AMAZON`` for you to search for {product} in amazon and show me the top results with name and price"
                     }
                 ]
             }
