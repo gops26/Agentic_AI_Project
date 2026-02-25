@@ -7,6 +7,8 @@ requires-python = ">=3.13"
 dependencies = [
     "composio>=0.11.1",
     "langchain>=1.2.10",
+    "langchain-core>=1.2.14",
     "langchain-mcp-adapters>=0.2.1",
     "langchain-ollama>=1.0.1",
+    "sarvamai>=0.1.25",
 ]

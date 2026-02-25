@@ -1,0 +1,2 @@
+OLLAMA_MODEL="gpt-oss:20b-cloud"
+COMPOSIO_EXTERNAL_USER_ID = "pg-test-baad7476-63b1-43c8-8980-3cf47519cdf3"

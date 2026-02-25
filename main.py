@@ -16,7 +16,7 @@ composio = Composio(api_key=os.environ["COMPOSIO"])
 
 session = composio.create(user_id=external_user_id)
 
-async def main():
+async def main(input_llm):
     mcp_cleint = MultiServerMCPClient(
         {
             "composio":{
@@ -27,25 +27,25 @@ async def main():
         }
     )
     tools = await mcp_cleint.get_tools()
+    
     agent = create_agent(
         tools = tools,
         model = llm
     )
-    products = ["wireless bluetooth headphones", "mechanical keyboard"]
-    for product in products:
-        print(f"\n--- Searching for: {product} ---")
-        result = await agent.ainvoke(
-            {
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": f"search using ``COMPOSIO_SEARCH_AMAZON`` for you to search for {product} in amazon and show me the top results with name and price"
-                    }
-                ]
-            }
-        )
-        print(result['messages'][-1].content)
+    
+        
+    result = await agent.ainvoke(
+        {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": input_llm
+                }
+            ]
+        }
+    )
+    print(result['messages'][-1].content)
 
 
 import asyncio
-asyncio.run(main())
+asyncio.run(main("what is the rate chopsticks in amazon"))
