@@ -1,11 +1,13 @@
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from config import COMPOSIO_EXTERNAL_USER_ID
 from composio import Composio
 import os
 from dotenv import load_dotenv
 import asyncio
 
 load_dotenv()
+
+COMPOSIO_EXTERNAL_USER_ID = "pg-test-baad7476-63b1-43c8-8980-3cf47519cdf3"
+
 
 composio = Composio(api_key=os.environ["COMPOSIO"])
 
@@ -22,12 +24,11 @@ mcp_client = MultiServerMCPClient(
     }
 )
 
+async def fetch_tools():
+    tools = await mcp_client.get_tools()
+    return tools 
 
-class Tools:
 
-    def __init__(self):
-        self.tools = asyncio.run(fetch_tools())
-
-    async def fetch_tools(self):
-        tools = await mcp_client.get_tools()
-        return tools
+def load_tools():
+    tools = asyncio.run(fetch_tools())
+    return tools
